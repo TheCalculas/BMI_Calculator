@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+const containerColor = Color(0xFF1D1E33);
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -19,31 +21,37 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(Color(0xFF1D1E33)),
+                  child: ReusableCard(containerColor),
                 ),
                 Expanded(
-                  child: ReusableCard(Color(0xFF1D1E33)),
+                  child: ReusableCard(containerColor),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(Color(0xFF1D1E33)),
+            child: ReusableCard(containerColor),
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(Color(0xFF1D1E33)),
+                  child: ReusableCard(containerColor),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    Color(0xFF1D1E33),
+                    containerColor,
                   ),
                 ),
               ],
             ),
           ),
+          Container(
+            color: Color(0xFFEB1555),
+            height: 80.0,
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 10.0),
+          )
         ],
       ),
     );
@@ -51,6 +59,7 @@ class _InputPageState extends State<InputPage> {
 }
 
 // Color(0xFF1D1E33)
+
 // as it was repeting so we extracted it out
 class ReusableCard extends StatelessWidget {
   ReusableCard(this.colour);
