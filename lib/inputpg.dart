@@ -1,7 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const containerColor = Color(0xFF1D1E33);
+const passiveContainerColor = Color(0xFF111328);
 
 class InputPage extends StatefulWidget {
   @override
@@ -9,6 +13,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleColor = passiveContainerColor;
+  Color femaleColor = passiveContainerColor;
+  int height = 170;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,31 +23,104 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.stretch, // stretches all the childrens
         children: [
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(containerColor),
+                  child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          maleColor = containerColor;
+                          femaleColor = passiveContainerColor;
+                        });
+                      },
+                      child: ReusableCard(
+                        maleColor,
+                        iconWiget(FontAwesomeIcons.mars, "Male"),
+                      )),
                 ),
                 Expanded(
-                  child: ReusableCard(containerColor),
+                  child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          femaleColor = containerColor;
+                          maleColor = passiveContainerColor;
+                        });
+                      },
+                      child: ReusableCard(
+                        femaleColor,
+                        iconWiget(FontAwesomeIcons.venus, "Female"),
+                      )),
                 ),
               ],
             ),
           ),
+          // Main Slider component
           Expanded(
-            child: ReusableCard(containerColor),
-          ),
+              child: ReusableCard(
+                  containerColor,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Height',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Color(0xFF8D8E98),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            height.toString(),
+                            style: TextStyle(
+                              fontSize: 50.0,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'cm',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          )
+                        ],
+                      ),
+                      Slider(
+                        value: height.toDouble(),
+                        min: 120,
+                        max: 220,
+                        // divisions: 1,
+                        activeColor: Color(0xFFEB1555),
+                        label: height.toString(),
+                        onChanged: (double value) {
+                          setState(() {
+                            height = value.round();
+                          });
+                        },
+                      ),
+                    ],
+                  ))),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(containerColor),
+                  child: ReusableCard(
+                    containerColor,
+                    iconWiget(FontAwesomeIcons.font, "ff"),
+                  ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     containerColor,
+                    iconWiget(FontAwesomeIcons.font, "sample"),
                   ),
                 ),
               ],
@@ -59,21 +139,3 @@ class _InputPageState extends State<InputPage> {
 }
 
 // Color(0xFF1D1E33)
-
-// as it was repeting so we extracted it out
-class ReusableCard extends StatelessWidget {
-  ReusableCard(this.colour);
-
-  // use final in case of the color property it makes this property immutable
-  final Color colour; // created a temp color variable
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
-}
