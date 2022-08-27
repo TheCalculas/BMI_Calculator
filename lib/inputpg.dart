@@ -58,7 +58,7 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          // Main Slider component
+          // Main Slider
           Expanded(
               child: ReusableCard(
                   containerColor,
