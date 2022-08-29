@@ -15,6 +15,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Color maleColor = passiveContainerColor;
   Color femaleColor = passiveContainerColor;
+  int weight = 60;
+  int age = 20;
   int height = 170;
   @override
   Widget build(BuildContext context) {
@@ -108,20 +110,121 @@ class _InputPageState extends State<InputPage> {
                       ),
                     ],
                   ))),
+          // Neeche waale dabbe
           Expanded(
             child: Row(
               children: [
                 Expanded(
                   child: ReusableCard(
-                    containerColor,
-                    iconWiget(FontAwesomeIcons.font, "ff"),
-                  ),
+                      containerColor,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Weight',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: TextStyle(
+                              fontSize: 50.0,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                onPressed: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                onPressed: () {
+                                    setState(() {
+                                      weight--;
+                                    });
+                                },
+                                child: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+
+                        ],
+                      )),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    containerColor,
-                    iconWiget(FontAwesomeIcons.font, "sample"),
-                  ),
+                      containerColor,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Age',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          ),
+                          Text(
+                            age.toString(),
+                            style: TextStyle(
+                              fontSize: 50.0,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+
+                        ],
+                      )),
                 ),
               ],
             ),
