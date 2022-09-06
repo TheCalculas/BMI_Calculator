@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'results_page.dart';
+import 'brain.dart';
 
 const containerColor = Color(0xFF1D1E33);
 const passiveContainerColor = Color(0xFF111328);
@@ -20,9 +22,10 @@ class _InputPageState extends State<InputPage> {
   int height = 170;
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Center(child: Text('BMI CALCULATOR', style: TextStyle(fontWeight: FontWeight.w900),)),
       ),
       body: Column(
         crossAxisAlignment:
@@ -140,12 +143,12 @@ class _InputPageState extends State<InputPage> {
                               FloatingActionButton(
                                 backgroundColor: Color(0xFF4C4F5E),
                                 onPressed: () {
-                                    setState(() {
-                                      weight++;
-                                    });
+                                  setState(() {
+                                    weight--;
+                                  });
                                 },
                                 child: Icon(
-                                  Icons.add,
+                                  Icons.remove,
                                   color: Colors.white,
                                 ),
                               ),
@@ -156,14 +159,16 @@ class _InputPageState extends State<InputPage> {
                                 backgroundColor: Color(0xFF4C4F5E),
                                 onPressed: () {
                                     setState(() {
-                                      weight--;
+                                      weight++;
                                     });
                                 },
                                 child: Icon(
-                                  Icons.remove,
+                                  Icons.add,
                                   color: Colors.white,
                                 ),
                               ),
+
+
                             ],
                           )
 
@@ -197,21 +202,6 @@ class _InputPageState extends State<InputPage> {
                                 backgroundColor: Color(0xFF4C4F5E),
                                 onPressed: () {
                                   setState(() {
-                                    age++;
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              FloatingActionButton(
-                                backgroundColor: Color(0xFF4C4F5E),
-                                onPressed: () {
-                                  setState(() {
                                     age--;
                                   });
                                 },
@@ -220,6 +210,23 @@ class _InputPageState extends State<InputPage> {
                                   color: Colors.white,
                                 ),
                               ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+
                             ],
                           )
 
@@ -229,11 +236,25 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: Color(0xFFEB1555),
-            height: 80.0,
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 10.0),
+          GestureDetector(
+            onTap: (){
+              Brain results = Brain(height, weight);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultsPage(results.GetResult(), results.Calculate(), results.getInterpretation())));
+            },
+            child: Container(
+              child: Center(
+                child: Text('CALCULATE', style:
+                    TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 25.0,
+                    )
+                  ,),
+              ),
+              color: Color(0xFFEB1555),
+              height: 80.0,
+              width: double.infinity,
+              margin: EdgeInsets.only(top: 10.0),
+            ),
           )
         ],
       ),
