@@ -239,7 +239,9 @@ class _InputPageState extends State<InputPage> {
           GestureDetector(
             onTap: (){
               Brain results = Brain(height, weight);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultsPage(results.GetResult(), results.Calculate(), results.getInterpretation())));
+              results.Calculate();
+              String res = results.GetResult();
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultsPage(res, results.Calculate(), results.getInterpretation())));
             },
             child: Container(
               child: Center(

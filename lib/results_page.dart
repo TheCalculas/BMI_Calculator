@@ -6,8 +6,11 @@ class ResultsPage extends StatelessWidget {
   ResultsPage(this.status, this.calculatedBMI, this.paragraph);
 
   final String status;
+
   final String calculatedBMI;
   final String paragraph;
+
+
   static const containerColor = Color(0xFF1D1E33);
   @override
   Widget build(BuildContext context) {
